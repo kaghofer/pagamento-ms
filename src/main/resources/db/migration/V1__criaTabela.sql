@@ -1,11 +1,11 @@
 CREATE TABLE pagamento(
-    id serial PRIMARY KEY,
+    id serial,
     valor decimal(19,2) NOT NULL ,
     nome varchar(100) DEFAULT NULL,
     numero varchar(20) DEFAULT NULL,
-    expiracao varchar(8) DEFAULT NULL,
+    expiracao varchar(10) DEFAULT NULL,
     codigo varchar(3) DEFAULT NULL,
     id_pedido bigint NOT NULL,
-    forma_de_pagamento_id bigint NOT NULL,
-    status varchar(255) DEFAULT NULL
+    status varchar(255) DEFAULT NULL,
+    primary key (id)
 );

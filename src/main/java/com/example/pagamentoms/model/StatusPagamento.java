@@ -1,6 +1,6 @@
 package com.example.pagamentoms.model;
 
-public enum Status {
+public enum StatusPagamento {
     PAGO,
     AGUARDANDO,
     CANCELADO

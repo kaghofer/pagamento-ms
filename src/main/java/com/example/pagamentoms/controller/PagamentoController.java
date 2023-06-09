@@ -22,7 +22,7 @@ public class PagamentoController {
     private PagamentoService service;
 
     @GetMapping
-    public Page<PagamentoDto> listar(@PageableDefault (size = 2)Pageable pag){
+    public Page<PagamentoDto> listar(@PageableDefault (size = 10)Pageable pag){
         return service.buscaTodos(pag);
     }
 

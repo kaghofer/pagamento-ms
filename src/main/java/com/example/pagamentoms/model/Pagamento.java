@@ -1,6 +1,8 @@
 package com.example.pagamentoms.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +14,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -36,7 +40,7 @@ public class Pagamento {
     private String numero;
 
     @NotBlank
-    @Size(max = 8)
+    @Size(max = 10)
     private String expiracao;
 
     @NotBlank
@@ -46,10 +50,14 @@ public class Pagamento {
     @NotNull
     private Long idPedido;
 
-    @NotNull
-    private Long formaDePagamentoId;
-
     @Enumerated(EnumType.STRING)
     @NotNull
-    private Status status;
+    private StatusPagamento status;
+
+//    @Enumerated(EnumType.STRING)
+//    private TipoPagamento tipoPagamento;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "pagamento")
+    List<ParcelaPagamento> parcelas = new ArrayList<>();
 }
