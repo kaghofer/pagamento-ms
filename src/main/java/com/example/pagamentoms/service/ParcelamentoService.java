@@ -42,4 +42,13 @@ public class ParcelamentoService {
         }
     }
 
+    public void cancelarTodasParcelas(Long id) {
+        List<ParcelaPagamento> lista = repository.buscarParcelasPagamento(id);
+        for (ParcelaPagamento p : lista) {
+            p.setStatusParcela(StatusParcela.EM_ABERTO);
+            p.setDataPagamento(null);
+            repository.save(p);
+        }
+    }
+
 }

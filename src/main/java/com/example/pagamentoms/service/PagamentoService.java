@@ -107,4 +107,14 @@ public class PagamentoService {
         repository.save(pagamento.get());
         pedido.atualizarPagamento(pagamento.get().getIdPedido());
     }
+    public void cancelarPagamento(Long id) {
+        Optional<Pagamento> pagamento = repository.findById(id);
+        if (!pagamento.isPresent()) {
+            throw new EntityNotFoundException();
+        }
+        serviceParcelas.cancelarTodasParcelas(id);
+        pagamento.get().setStatus(StatusPagamento.CANCELADO);
+        repository.save(pagamento.get());
+        pedido.cancelarPagamento(pagamento.get().getIdPedido());
+    }
 }

@@ -9,4 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
     public interface PagamentoHttp{
         @RequestMapping(method = RequestMethod.PUT, value = "/pedido/{id}/pago")
         void atualizarPagamento(@PathVariable Long id);
+
+        @RequestMapping(method = RequestMethod.PUT, value = "/pedido/{id}/cancelado")
+        void cancelarPagamento(@PathVariable Long id);
     }

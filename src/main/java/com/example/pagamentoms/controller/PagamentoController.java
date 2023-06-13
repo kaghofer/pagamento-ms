@@ -56,4 +56,8 @@ public class PagamentoController {
     public void confirmaPagamento(@PathVariable @NotNull Long id){
         service.confirmaPagamento(id);
     }
+    @PatchMapping("/{id}/cancelar")
+    public void cancelarPagamento(@PathVariable @NotNull Long id){
+        service.cancelarPagamento(id);
+    }
 }
