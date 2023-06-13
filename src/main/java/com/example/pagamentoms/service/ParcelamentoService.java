@@ -40,8 +40,6 @@ public class ParcelamentoService {
             p.setDataPagamento(LocalDateTime.now());
             repository.save(p);
         }
-
-
     }
 
 }

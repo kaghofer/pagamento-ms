@@ -32,6 +32,9 @@ public class PagamentoService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private ParcelamentoService serviceParcelas;
+
     //Retorna todos os pagamentos páginados por em X elementos
     public Page<PagamentoDto> buscaTodos(Pageable pag) {
         return repository
@@ -73,14 +76,11 @@ public class PagamentoService {
 
             var mov = modelMapper.map(pagamento, PagamentoDto.class);
 
-
-
             mov.setQtdParcelas(mov.getParcelas().size());
 
             return mov;
         }
         return null;
-
     }
 
     //Passa-se um ID via REQUEST e depois altera o objeto no BODY
@@ -102,8 +102,7 @@ public class PagamentoService {
         if (!pagamento.isPresent()) {
             throw new EntityNotFoundException();
         }
-
-
+        serviceParcelas.pagarTodasParcelas(id);
         pagamento.get().setStatus(StatusPagamento.PAGO);
         repository.save(pagamento.get());
         pedido.atualizarPagamento(pagamento.get().getIdPedido());

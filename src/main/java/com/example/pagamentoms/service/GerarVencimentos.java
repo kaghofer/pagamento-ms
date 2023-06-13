@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -45,7 +46,10 @@ public class GerarVencimentos {
 
         List<ParcelaPagamento> parcelas = new ArrayList<>();
 
-        BigDecimal vlParcela = pagamentoDto.getValor().divide(BigDecimal.valueOf(pagamentoDto.getQtdParcelas()));
+        //var vl1 = pagamentoDto.getValor().divide(BigDecimal.valueOf(pagamentoDto.getQtdParcelas()));
+
+        BigDecimal vlParcela = pagamentoDto.getValor()
+                .divide(BigDecimal.valueOf(pagamentoDto.getQtdParcelas()), 2, RoundingMode.HALF_UP);
 
         LocalDate temp = LocalDate.now();
         for (int i = 0; i < pagamentoDto.getQtdParcelas(); i++) {

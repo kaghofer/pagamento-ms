@@ -26,5 +26,6 @@ public class PagamentoDto {
     private Long idPedido;
     private StatusPagamento status;
     private int qtdParcelas;
+    private String formaPagamento;
     private List<ParcelaDto> parcelas;
 }
